@@ -5,7 +5,7 @@ app = Flask(__name__, template_folder='./')
 # Conversion functions
 def kg_to_grams(kg):
     # INTENTIONAL BUG FOR TASK 5
-    return kg * 999   # should be 1000
+    return kg * 1000
 
 def grams_to_kg(grams):
     return grams * 0.001
