@@ -68,7 +68,7 @@ def index():
         except ValueError:
             result = "Invalid input"
 
-    return render_template('index.html', result=result)
+    return "BROKEN APP"
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=False)
