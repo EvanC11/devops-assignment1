@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 
-app = Flask(__name__, template_folder='./')
+app = Flask(__name__, template_folder='./')  # Task 5 feature branch demo
 
 # Conversion functions
 def kg_to_grams(kg):
