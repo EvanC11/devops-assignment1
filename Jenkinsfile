@@ -3,6 +3,7 @@ pipeline {
 
   environment {
     IMAGE_NAME = "evancraig11/devops-assignment1"
+    CONTAINER_NAME = "flask-prod"
   }
 
   stages {
@@ -50,6 +51,28 @@ pipeline {
             docker push ${IMAGE_NAME}:${BUILD_NUMBER}
           '''
         }
+      }
+    }
+
+    stage('Deploy to EC2 (local)') {
+      steps {
+        sh '''
+          set -e
+
+          echo "Pulling latest image..."
+          docker pull ${IMAGE_NAME}:latest
+
+          echo "Stopping old container (if exists)..."
+          docker rm -f ${CONTAINER_NAME} 2>/dev/null || true
+
+          echo "Starting new container on port 5000..."
+          docker run -d --name ${CONTAINER_NAME} -p 5000:5000 ${IMAGE_NAME}:latest
+
+          echo "Verifying locally via Nginx upstream port..."
+          sleep 2
+          curl -fsS http://localhost:5000 >/dev/null
+          echo "Deploy OK"
+        '''
       }
     }
   }
