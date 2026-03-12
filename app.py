@@ -1,3 +1,5 @@
+# Minor update for CI demonstration
+
 from flask import Flask, render_template, request
 
 app = Flask(__name__, template_folder='./')  # Task 5 feature branch demo
